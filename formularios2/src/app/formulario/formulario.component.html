@@ -1,0 +1,56 @@
+  
+<div class="main">
+    <form class="container-form" [formGroup]="miFormulario" (ngSubmit)="addPerson(miFormulario)">
+        <!-- <label for="textName">Name</label>
+        <input type="text" name="textName" formControlName="name">
+        <label for="textApellido">Apellido</label>
+        <input type="text" name="textApellido" formControlName="apellido"> -->
+        <div class="separete-v">
+            <textarea cols="100" rows="15" formControlName="contenido"></textarea>
+        </div>
+        <div class="separete-v">
+            <select name="select" formControlName="seleccionar">
+                <option value="p">parrafo</option>
+                <option value="h1">h1</option>
+                <option value="h2">h2</option>
+                <option value="img">img</option>
+                <option value="code">code</option>
+                
+            </select>
+        </div>
+        <input type="submit" value="Enviar" >
+    </form>
+
+    <div><button (click)="generarHTML(miarray)">enviar array</button></div>
+
+    <p (click)="mostrarConsole()">oprimier para mistrar</p>
+
+   <!--  <div *ngFor="let mi of miarray; let i = index">
+
+        <p>{{mi.etiqueta}} : {{mi.dato}} user {{i+1}}</p>
+        
+    </div> -->
+
+    <!-- <div *ngFor="let mi2 in miarray">
+        <p>{{mi2}}</p>
+    </div> -->
+
+
+    <div class="container-form">
+        <div *ngFor="let mi of arrayContenido; let i = index">
+    
+            <div>
+                <p class="parrafo">{{mi}}</p>
+                <!-- <input type="button" [value]="i" (click)="removeItem(i)"> -->
+                <button type="button" (click)="removeItem(i)">borrar item {{i}}</button>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+
+</div>
+<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider> -->
+

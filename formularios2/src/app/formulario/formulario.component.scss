@@ -1,0 +1,40 @@
+.example-card{
+    width: 25%;
+    border: 1px solid black;
+    margin: 20px;
+   
+}
+
+.card-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: rgb(4, 161, 161);
+    border: 1px solid black;
+    margin: 5px;
+}
+
+.separete-v{
+    margin: 20px 0;
+}
+
+.main{
+    min-width: 400px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.container-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: bisque;
+    align-items: center;
+    padding: 50px;
+}
+
+.parrafo{
+    border: 1px solid black;
+    padding: 10px;
+
+}
