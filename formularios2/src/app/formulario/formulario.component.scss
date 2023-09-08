@@ -38,3 +38,10 @@
     padding: 10px;
 
 }
+
+.agrupados{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 25px;
+}

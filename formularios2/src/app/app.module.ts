@@ -8,6 +8,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+  HttpClientModule
     
     
     
