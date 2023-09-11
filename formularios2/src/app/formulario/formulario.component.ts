@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
-import { ArrayEtiquetas, Contenido } from '../interfaces/interface_datos';
+import { ArrayEtiquetas, Contenido, Subcontenido } from '../interfaces/interface_datos';
 import { SavebdService } from '../savebd.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,6 +18,9 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+
+
 
   miarray:Contenido[] =[]; 
   arrayContenido:any[]=[];
@@ -28,8 +31,15 @@ etiqueta:string="";
 clase:string="";
 contenido:string="";
 url:string="";
-subcontenido:string="";
 codigo:string="";
+
+subcontenido:Subcontenido[]=[];
+arraysub:Subcontenido[]=[];
+
+subconetiqueta:string="";
+subconclase:string="";
+subconcontenido:string="";
+
 
 
 arrayProvisional:string="";
@@ -43,22 +53,30 @@ clasesCss:any[]=[
   {"clase":"title-h2", "etiqueta":"h2", "nombre":"h2"},
   {"clase":"title-h3", "etiqueta":"h3", "nombre":"h3"},
   {"clase":"img", "etiqueta":"img", "nombre":"img"},
-  {"clase":"code", "etiqueta":"Code", "nombre":"img"}
+  {"clase":"code", "etiqueta":"Code", "nombre":"code"}
 ];
+
+
+subconpresent:any[]=[
+  {"present":true},
+  {"present":false},
+]
 
 
 
   miFormulario = new FormGroup({
-    /* name: new FormControl('', [Validators.min(3)]),
-    apellido: new FormControl('', [Validators.min(3)]), */
-
     seccion: new FormControl(''),
     etiqueta: new FormControl(''),
     clase: new FormControl(''),
     contenido: new FormControl(''),
     url: new FormControl(''),
-    subcontenido: new FormControl(''),
-    codigo: new FormControl('')
+    codigo: new FormControl(''),
+    selectsubcon: new FormControl(''),
+      subconetiqueta: new FormControl(''),
+      subconclase: new FormControl(''),
+      subconcontenido: new FormControl(''),
+      checkbox:new FormControl('')
+    
   })
 
   addPerson(miformulario:FormGroup): void {
@@ -68,11 +86,15 @@ clasesCss:any[]=[
     this.clase= this.miFormulario.get('clase')?.value;
     this.contenido= this.miFormulario.get('contenido')?.value;
     this.url= this.miFormulario.get('url')?.value;
-    this.subcontenido= this.miFormulario.get('subcontenido')?.value;
     this.codigo= this.miFormulario.get('codigo')?.value;
+    
+    this.subconetiqueta=this.miFormulario.get('subconetiqueta')?.value;
+    this.subconclase=this.miFormulario.get('subconclase')?.value;
+    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value;
 
     console.log(this.etiqueta, this.contenido)
-  
+
+    
     let miObjeto = {
 
       seccion:`${this.seccion}`,
@@ -80,7 +102,7 @@ clasesCss:any[]=[
       clase:`${this.clase}`,
       contenido:`${this.contenido}`,
       url:`${this.url}`,
-      subcontenido:`${this.subcontenido}`,
+      subcontenido:this.arraysub,
       codigo:`${this.codigo}`
       };
   
@@ -110,29 +132,8 @@ clasesCss:any[]=[
 
       let copia = {etiqueta:`<${obj.etiqueta} class='${obj.clase}'>${obj.contenido}</${obj.etiqueta}>`};
       this.ArrayEtiquetas.push(copia);
+      console.log(obj.subcontenido)
 
-     /*  if (obj.etiqueta === "p") {
-
-        this.arrayContenido.push(`<p class='${obj.clase}'>${obj.contenido}</p>`);
-      } else if (obj.etiqueta === "h1") {
-      
-        this.arrayContenido.push(`<h1 class='${obj.clase}'>${obj.contenido}</h1>`);
-      } else if (obj.etiqueta === "h2") {
-      
-        this.arrayContenido.push(`<h2 class='${obj.clase}'>${obj.contenido}</h2>`);
-      } else if (obj.etiqueta === "h3") {
-      
-        this.arrayContenido.push(`<h3 class='${obj.clase}'>${obj.contenido}</h3>`);
-      }
-      else if (obj.etiqueta === "img") {
-      
-        this.arrayContenido.push(`<Addimagen direccion='${obj.url}'></Addimagen>`);
-      }
-      else if (obj.etiqueta === "code") {
-      
-        this.arrayContenido.push(`<Code>${obj.codigo}</Code>`);
-      } */
-      
     }
     
     console.log(this.ArrayEtiquetas);
@@ -158,7 +159,30 @@ clasesCss:any[]=[
     }
     )
   }
+  
 
+  crearSubcontenido(formulario:FormGroup){
+   if(formulario.get('subconcontenido')?.value=="" ||
+   formulario.get('subconetiqueta')?.value==""
+   ){
+
+    console.log("no se han agregado datos");
+
+   }else{
+    this.subconetiqueta=this.miFormulario.get('subconetiqueta')?.value;
+    this.subconclase=this.miFormulario.get('subconclase')?.value;
+    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value;
+
+    let objectoSubcontenido ={
+      etiqueta:`${this.subconetiqueta}`,
+      clase:`${this.subconclase}`,
+      contenido:`${this.subconcontenido}`,
+    }
+
+    this.arraysub.push(objectoSubcontenido);
+    console.log(this.arraysub)
+   }
+  }
   
   
 

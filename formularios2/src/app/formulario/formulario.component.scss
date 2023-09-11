@@ -18,6 +18,10 @@
     margin: 20px 0;
 }
 
+.separete-v>*{
+    margin-left: 10px;
+}
+
 .main{
     min-width: 400px;
     max-width: 1000px;
@@ -27,9 +31,9 @@
 .container-form{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
     background-color: bisque;
-    align-items: center;
+    align-items: start;
     padding: 50px;
 }
 
@@ -44,4 +48,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 25px;
+}
+
+.boton-subcontenido{
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(233, 218, 7);
+    border: 3px solid blue;
+}
+.boton-subcontenido:hover{
+   
+    background-color: rgb(113, 113, 124);
+  
 }

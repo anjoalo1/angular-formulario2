@@ -7,53 +7,114 @@
         <input type="text" name="textApellido" formControlName="apellido"> -->
         <!-- campo seccion  -->
        <div class="agrupados">
-        <label for="textSeccion">seccion</label>
-        <input type="text" name="textSeccion" formControlName="seccion">
-        <div class="separete-v">
-            <label for="selectEtiqueta">Etiqueta</label>
-            <select name="selectEtiqueta"  formControlName="etiqueta">
-                <option value="p">parrafo</option>
-                <option value="h1">h1</option>
-                <option value="h2">h2</option>
-                <option value="h3">h3</option>
-                <option value="img">img</option>
-                <option value="code">code</option>
-                
-            </select>
-        </div>
-        <div>
-            <label for="textClase">clase</label>
-           <!--  <input type="text" name="textClase" formControlName="clase"> -->
-            <select name="textClase" formControlName="clase">
-                <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
-            </select>
-        </div>
+            <div class="separete-v">
+                <label for="textSeccion">seccion</label>
+            <input type="text" name="textSeccion" formControlName="seccion">
+            </div>
+            <!-- campo etiqueta para saber que tipo p, h1, h2 etc -->
+            <div class="separete-v">
+                <label for="selectEtiqueta">Etiqueta</label>
+                <select name="selectEtiqueta"  formControlName="etiqueta">
+                    <option *ngFor ="let cont of clasesCss" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
+                </select>
+            </div>
+
+            <!-- estilos para cc clase -->
+            <div class="separete-v">
+                <label for="subconetiqueta">clase</label>
+            <!--  <input type="text" name="textClase" formControlName="clase"> -->
+                <select name="subconetiqueta" formControlName="subconetiqueta">
+                    <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
+                </select>
+            </div>
        </div>
 
-       <!-- campo tipo de etiqueta  -->
+
+        <!-- en caso de ser una imagen agregamos la direccion "src" -->
+
+        <div class="agrupados" *ngIf="miFormulario.get('etiqueta')?.value=='img'">
+
+            <label for="textUrl">url</label>
+            <input type="text" name="textUrl" formControlName="url">
+        </div>
+       
+
+        <!-- aqui iria el contenido del archivo 
         
-
-        <!-- campo clase  -->
-       
-
-       
-
-
+        -->
         <!-- campo dato -->
         <div class="separete-v">
             <label for="textContenido">contenido</label>
             <textarea name="textContenido" cols="100" rows="10" formControlName="contenido"></textarea>
         </div>
 
+
+<!-- en caso de tener mas etiquecas dentro 
+como pudes ser un y dentro tiene li<ul>
+<li>contenido</li>
+<li>contenido</li>
+<li>contenido</li>
+</ul>
+-->
+<!-- ---------------------------------------------- -->
+
+
+
+        <div class="agrupados">
+            <div class="separete-v">
+                <label for="selectsubcon">Etiqueta</label>
+                <select name="selectsubcon"  formControlName="selectsubcon">
+                    <option *ngFor ="let cont of subconpresent" value={{cont.present}} >{{cont.present}}</option>
+                </select>
+            </div>
+
+            <div class="agrupados" *ngIf="miFormulario.get('selectsubcon')?.value=='true'">
+
+                
+
+                <div class="agrupados">
+
+                    
+                    <div>
+                    <label for="textClase2">clase</label>
+                   <!--  <input type="text" name="textClase" formControlName="clase"> -->
+                    <select name="textClase2" formControlName="subconetiqueta">
+                        <option *ngFor ="let cont of clasesCss" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="textClase2">clase</label>
+                   <!--  <input type="text" name="textClase" formControlName="clase"> -->
+                    <select name="textClase2" formControlName="subconclase">
+                        <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
+                    </select>
+                </div>
+                </div>
+
+                <div class="separete-v">
+                    <label for="textContenido2">sub contenido</label>
+                    <textarea name="textContenido2" cols="100" rows="10" formControlName="subconcontenido"></textarea>
+                </div>
+
+
+                <div (click)="crearSubcontenido(miFormulario)">
+                    <p class="boton-subcontenido">enviar subcontenido</p>
+                </div>
+            </div>
+           
+
+        </div>
+
          <!-- campo url  -->
-         <label for="textUrl">url</label>
-         <input type="text" name="textUrl" formControlName="url">
+       
 
     <!-- campo subcontenido-->
-         <div class="separete-v">
+       <!--   <div class="separete-v">
             <label for="textSubcontenido">Subcontenido</label>
             <textarea name="textSubcontenido" cols="100" rows="10" formControlName="subcontenido"></textarea>
-        </div>
+        </div> -->
 
     <!-- campo codigo-->
          <div class="separete-v">
@@ -117,7 +178,10 @@
     <hr>
 
     <p>{{arrayProvisional}}</p>
+    <hr>
+    <hr>
     <p *ngFor ="let col of ArrayEtiquetas">{{col.etiqueta}}</p>
+  <p>{{arrayProvisional1}}</p>
 
 
 
