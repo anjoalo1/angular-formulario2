@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { ArrayEtiquetas, Contenido, Subcontenido } from '../interfaces/interface_datos';
 import { SavebdService } from '../savebd.service';
 import { HttpClient } from '@angular/common/http';
+
+
 
 
 
@@ -25,6 +27,11 @@ export class FormularioComponent implements OnInit {
   miarray:Contenido[] =[]; 
   arrayContenido:any[]=[];
   ArrayEtiquetas:ArrayEtiquetas[]=[];
+
+  arrayAllTag:any[]=[];
+  
+  convertirObjeto:any;
+  convertirObjetostring:string="";
  
 seccion:string="";
 etiqueta:string="";
@@ -32,6 +39,7 @@ clase:string="";
 contenido:string="";
 url:string="";
 codigo:string="";
+
 
 subcontenido:Subcontenido[]=[];
 arraysub:Subcontenido[]=[];
@@ -43,7 +51,7 @@ subconcontenido:string="";
 
 
 arrayProvisional:string="";
-arrayProvisional1:string="";
+
 
 
 
@@ -52,15 +60,14 @@ clasesCss:any[]=[
   {"clase":"title-h1", "etiqueta":"h1", "nombre":"h1"},
   {"clase":"title-h2", "etiqueta":"h2", "nombre":"h2"},
   {"clase":"title-h3", "etiqueta":"h3", "nombre":"h3"},
+  {"clase":"", "etiqueta":"ul", "nombre":"ul"},
+  {"clase":"", "etiqueta":"li", "nombre":"li"},
   {"clase":"img", "etiqueta":"img", "nombre":"img"},
   {"clase":"code", "etiqueta":"Code", "nombre":"code"}
 ];
 
 
-subconpresent:any[]=[
-  {"present":true},
-  {"present":false},
-]
+
 
 
 
@@ -71,11 +78,11 @@ subconpresent:any[]=[
     contenido: new FormControl(''),
     url: new FormControl(''),
     codigo: new FormControl(''),
-    selectsubcon: new FormControl(''),
+    /* selectsubcon: new FormControl(''),
       subconetiqueta: new FormControl(''),
       subconclase: new FormControl(''),
+      checkbox:new FormControl('') */
       subconcontenido: new FormControl(''),
-      checkbox:new FormControl('')
     
   })
 
@@ -87,10 +94,12 @@ subconpresent:any[]=[
     this.contenido= this.miFormulario.get('contenido')?.value;
     this.url= this.miFormulario.get('url')?.value;
     this.codigo= this.miFormulario.get('codigo')?.value;
+   /*  this.selectsubcon= this.miFormulario.get('selectsubcon')?.value;
+    console.log(this.selectsubcon);
     
     this.subconetiqueta=this.miFormulario.get('subconetiqueta')?.value;
-    this.subconclase=this.miFormulario.get('subconclase')?.value;
-    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value;
+    this.subconclase=this.miFormulario.get('subconclase')?.value;*/
+    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value; 
 
     console.log(this.etiqueta, this.contenido)
 
@@ -102,6 +111,7 @@ subconpresent:any[]=[
       clase:`${this.clase}`,
       contenido:`${this.contenido}`,
       url:`${this.url}`,
+   /*    selectsubcon:`${this.selectsubcon}`, */
       subcontenido:this.arraysub,
       codigo:`${this.codigo}`
       };
@@ -123,6 +133,7 @@ subconpresent:any[]=[
   }
 
 
+  /* aquie el metodo para generar las etiquetas */
 
  generarHTML(arr:Contenido[]) {
   let resultado="";
@@ -130,17 +141,23 @@ subconpresent:any[]=[
   
     for (const obj of arr) {
 
+      
+
       let copia = {etiqueta:`<${obj.etiqueta} class='${obj.clase}'>${obj.contenido}</${obj.etiqueta}>`};
       this.ArrayEtiquetas.push(copia);
-      console.log(obj.subcontenido)
+      this.arrayAllTag.push(`<${obj.etiqueta} class='${obj.clase}'>${obj.contenido}</${obj.etiqueta}>`);
+
+
+      console.log("arrayAlltag", this.arrayAllTag);
+       this.convertirObjeto = {...this.arrayAllTag};
+      console.log("convirtienrod", this.convertirObjeto);
+      this.convertirObjetostring = JSON.stringify(this.convertirObjeto);
+      console.log(this.convertirObjetostring);
+
 
     }
     
-    console.log(this.ArrayEtiquetas);
-    this.arrayProvisional1=JSON.stringify(this.ArrayEtiquetas);
-    console.log(this.arrayProvisional1);
-    
-    return resultado;
+
   }
 
   mostrarConsole(){
@@ -159,31 +176,6 @@ subconpresent:any[]=[
     }
     )
   }
-  
-
-  crearSubcontenido(formulario:FormGroup){
-   if(formulario.get('subconcontenido')?.value=="" ||
-   formulario.get('subconetiqueta')?.value==""
-   ){
-
-    console.log("no se han agregado datos");
-
-   }else{
-    this.subconetiqueta=this.miFormulario.get('subconetiqueta')?.value;
-    this.subconclase=this.miFormulario.get('subconclase')?.value;
-    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value;
-
-    let objectoSubcontenido ={
-      etiqueta:`${this.subconetiqueta}`,
-      clase:`${this.subconclase}`,
-      contenido:`${this.subconcontenido}`,
-    }
-
-    this.arraysub.push(objectoSubcontenido);
-    console.log(this.arraysub)
-   }
-  }
-  
   
 
 }

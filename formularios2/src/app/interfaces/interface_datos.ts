@@ -4,6 +4,7 @@ export interface Contenido {
     clase:String;
     contenido: String;
     url?:String;
+   /*  selectsubcon:String; */
     subcontenido?:Subcontenido[];
     codigo?:String;
   

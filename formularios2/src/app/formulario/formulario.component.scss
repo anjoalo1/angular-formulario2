@@ -15,7 +15,9 @@
 }
 
 .separete-v{
+   
     margin: 20px 0;
+  
 }
 
 .separete-v>*{
@@ -60,4 +62,33 @@
    
     background-color: rgb(113, 113, 124);
   
+}
+
+.boton-enviar{
+    padding: 10px 30px;
+    background-color: rgb(89, 14, 118);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+.boton-enviar:hover{
+    background-color: rgb(21, 86, 86);
+}
+
+.boton-borrar{
+    padding: 10px 30px;
+    background-color: rgb(154, 18, 18);
+    font-size: 1.5rem;
+}
+
+.presentar-datos{
+    font-size: 1rem;
+    border: 1px solid blue;
+    margin: 5px 0;
+}
+
+.presentacion-informacion{
+    border: 1px solid orange;
+    padding: 10px 5px;
 }

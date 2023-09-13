@@ -1,11 +1,7 @@
   
 <div class="main">
     <form class="container-form" [formGroup]="miFormulario" (ngSubmit)="addPerson(miFormulario)">
-        <!-- <label for="textName">Name</label>
-        <input type="text" name="textName" formControlName="name">
-        <label for="textApellido">Apellido</label>
-        <input type="text" name="textApellido" formControlName="apellido"> -->
-        <!-- campo seccion  -->
+       
        <div class="agrupados">
             <div class="separete-v">
                 <label for="textSeccion">seccion</label>
@@ -21,9 +17,9 @@
 
             <!-- estilos para cc clase -->
             <div class="separete-v">
-                <label for="subconetiqueta">clase</label>
+                <label for="textclase">clase</label>
             <!--  <input type="text" name="textClase" formControlName="clase"> -->
-                <select name="subconetiqueta" formControlName="subconetiqueta">
+                <select name="textclase" formControlName="clase">
                     <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
                 </select>
             </div>
@@ -39,9 +35,7 @@
         </div>
        
 
-        <!-- aqui iria el contenido del archivo 
-        
-        -->
+     
         <!-- campo dato -->
         <div class="separete-v">
             <label for="textContenido">contenido</label>
@@ -49,140 +43,65 @@
         </div>
 
 
-<!-- en caso de tener mas etiquecas dentro 
-como pudes ser un y dentro tiene li<ul>
-<li>contenido</li>
-<li>contenido</li>
-<li>contenido</li>
-</ul>
--->
-<!-- ---------------------------------------------- -->
 
 
-
-        <div class="agrupados">
-            <div class="separete-v">
-                <label for="selectsubcon">Etiqueta</label>
-                <select name="selectsubcon"  formControlName="selectsubcon">
-                    <option *ngFor ="let cont of subconpresent" value={{cont.present}} >{{cont.present}}</option>
-                </select>
-            </div>
-
-            <div class="agrupados" *ngIf="miFormulario.get('selectsubcon')?.value=='true'">
-
-                
-
-                <div class="agrupados">
-
-                    
-                    <div>
-                    <label for="textClase2">clase</label>
-                   <!--  <input type="text" name="textClase" formControlName="clase"> -->
-                    <select name="textClase2" formControlName="subconetiqueta">
-                        <option *ngFor ="let cont of clasesCss" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
-                    </select>
-                </div>
-
-
-                <div>
-                    <label for="textClase2">clase</label>
-                   <!--  <input type="text" name="textClase" formControlName="clase"> -->
-                    <select name="textClase2" formControlName="subconclase">
-                        <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
-                    </select>
-                </div>
-                </div>
-
-                <div class="separete-v">
-                    <label for="textContenido2">sub contenido</label>
-                    <textarea name="textContenido2" cols="100" rows="10" formControlName="subconcontenido"></textarea>
-                </div>
-
-
-                <div (click)="crearSubcontenido(miFormulario)">
-                    <p class="boton-subcontenido">enviar subcontenido</p>
-                </div>
-            </div>
-           
-
-        </div>
-
-         <!-- campo url  -->
-       
-
-    <!-- campo subcontenido-->
-       <!--   <div class="separete-v">
-            <label for="textSubcontenido">Subcontenido</label>
-            <textarea name="textSubcontenido" cols="100" rows="10" formControlName="subcontenido"></textarea>
-        </div> -->
 
     <!-- campo codigo-->
+
+    <div class="agrupados" *ngIf="miFormulario.get('etiqueta')?.value=='Code'">
+        <label for="textCodigo">codigo</label>
+        <textarea name="textCodigo" cols="100" rows="6" formControlName="codigo"></textarea>
+        </div>
+
+
+
          <div class="separete-v">
-            <label for="textCodigo">codigo</label>
-            <textarea name="textCodigo" cols="100" rows="10" formControlName="codigo"></textarea>
+          
         </div>
 
 
 
 
 
-        <input type="submit" value="Enviar" >
+        <input class="boton-enviar" type="submit" value="construir" >
     </form>
 
        
 
-    <div *ngFor="let mi of miarray; let i = index">
-        <div>
-            <div class="parrafo">{{mi.clase}}</div>
-            <div class="parrafo">{{mi.contenido}}</div>
-            <div class="parrafo">{{mi.etiqueta}}</div>
-            <div class="parrafo">{{mi.seccion}}</div>
-            <div class="parrafo">{{mi.subcontenido}}</div>
-            <div class="parrafo">{{mi.url}}</div>
-            
+    <div class="presentar-datos" *ngFor="let mi of miarray; let i = index">
+            <div><span>clase: </span>{{mi.clase}} <span>contenido: </span>{{mi.contenido}}<span>etiqueta: </span>{{mi.etiqueta}} <span>seccion: </span>{{mi.seccion}}<span>subcontenido: </span>{{mi.subcontenido}}<span>url: </span>{{mi.url}}</div>
 
-            <button type="button" (click)="removeItem2(i)">borrar item {{i}}</button>
-        </div> 
+
+
+            <button class="boton-borrar" type="button" (click)="removeItem2(i)">borrar item {{i}}</button>
     </div>
     
 
-
   <hr>
-
-    <div><button (click)="generarHTML(miarray)">enviar array</button></div>
-
+    <div>
+        <button class="boton-enviar" (click)="generarHTML(miarray)">enviar array</button>
+    </div>
     <p (click)="mostrarConsole()">oprimier para mistrar</p>
 
-   <!--  <div *ngFor="let mi of miarray; let i = index">
-
-        <p>{{mi.etiqueta}} : {{mi.dato}} user {{i+1}}</p>
-        
-    </div> -->
-
-    <!-- <div *ngFor="let mi2 in miarray">
-        <p>{{mi2}}</p>
-    </div> -->
 
 
-    <div class="container-form">
-        <div *ngFor="let mi of arrayContenido; let i = index">
-            <div>
-                <p class="parrafo">{{mi}}</p>
-                <button type="button" (click)="removeItem(i)">borrar item {{i}}</button>
-            </div>
-            
-        </div>
 
+
+
+    <div class="presentacion-informacion">
+        <p>aqui iria array provisional</p>
+
+        <p>{{arrayProvisional}}</p>
     </div>
 
-    <hr>
 
-    <p>{{arrayProvisional}}</p>
-    <hr>
-    <hr>
-    <p *ngFor ="let col of ArrayEtiquetas">{{col.etiqueta}}</p>
-  <p>{{arrayProvisional1}}</p>
 
+
+
+ 
+  <div class="presentacion-informacion">
+    <p>{{this.convertirObjetostring}}</p>
+  </div>
 
 
     <div>
@@ -190,5 +109,5 @@ como pudes ser un y dentro tiene li<ul>
     </div>
 
 </div>
-<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider> -->
+
 
