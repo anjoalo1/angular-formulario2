@@ -6,23 +6,18 @@ import { SavebdService } from '../savebd.service';
 import { HttpClient } from '@angular/common/http';
 
 
-
-
-
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
   styleUrls: ['./formulario.component.scss']
 })
-export class FormularioComponent implements OnInit {
+export class FormularioComponent implements OnInit{
+
 
   constructor(public json: SavebdService, private http: HttpClient) { }
 
-  ngOnInit(): void {
-  }
-  
-
-
+  ngOnInit(): void {}
+ 
 
   miarray:Contenido[] =[]; 
   arrayContenido:any[]=[];
@@ -78,10 +73,6 @@ clasesCss:any[]=[
     contenido: new FormControl(''),
     url: new FormControl(''),
     codigo: new FormControl(''),
-    /* selectsubcon: new FormControl(''),
-      subconetiqueta: new FormControl(''),
-      subconclase: new FormControl(''),
-      checkbox:new FormControl('') */
       subconcontenido: new FormControl(''),
     
   })
@@ -94,12 +85,6 @@ clasesCss:any[]=[
     this.contenido= this.miFormulario.get('contenido')?.value;
     this.url= this.miFormulario.get('url')?.value;
     this.codigo= this.miFormulario.get('codigo')?.value;
-   /*  this.selectsubcon= this.miFormulario.get('selectsubcon')?.value;
-    console.log(this.selectsubcon);
-    
-    this.subconetiqueta=this.miFormulario.get('subconetiqueta')?.value;
-    this.subconclase=this.miFormulario.get('subconclase')?.value;*/
-    this.subconcontenido=this.miFormulario.get('subconcontenido')?.value; 
 
     console.log(this.etiqueta, this.contenido)
 
@@ -111,7 +96,6 @@ clasesCss:any[]=[
       clase:`${this.clase}`,
       contenido:`${this.contenido}`,
       url:`${this.url}`,
-   /*    selectsubcon:`${this.selectsubcon}`, */
       subcontenido:this.arraysub,
       codigo:`${this.codigo}`
       };
@@ -138,7 +122,10 @@ clasesCss:any[]=[
  generarHTML(arr:Contenido[]) {
   let resultado="";
     this.arrayContenido=[];
-  
+    this.ArrayEtiquetas=[];
+    this.arrayAllTag=[];
+    this.convertirObjetostring=""
+    this.convertirObjeto="";
     for (const obj of arr) {
 
       
@@ -148,7 +135,7 @@ clasesCss:any[]=[
       this.arrayAllTag.push(`<${obj.etiqueta} class='${obj.clase}'>${obj.contenido}</${obj.etiqueta}>`);
 
 
-      console.log("arrayAlltag", this.arrayAllTag);
+      //console.log("arrayAlltag", this.arrayAllTag);
        this.convertirObjeto = {...this.arrayAllTag};
       console.log("convirtienrod", this.convertirObjeto);
       this.convertirObjetostring = JSON.stringify(this.convertirObjeto);
@@ -176,6 +163,92 @@ clasesCss:any[]=[
     }
     )
   }
+
+
+
+
+
+/* aquqqi va el segundo formulario o */
+tagPadre:any[]=[
+  {"etiqueta":"ul", "nombre":"ul"},
+  {"etiqueta":"ol", "nombre":"ol"},
+];
+
+
+
+
+
+etiquetaPadre:string="";
+  etiqueta2:string="";
+  clase2:string="";
+  contenido2:string="";
+
+  formulario2Array:any[]=[];
+  arrayTag2:any[]=[];
+
+  miFormulario2 = new FormGroup({
+    etiquetaPadre:new FormControl(''),
+    etiqueta: new FormControl(''),
+    clase: new FormControl(''),
+    contenido: new FormControl('')
+  })
+
+  subcontenido2(formulario:FormGroup):void{
+   /*  this.seccion2 = this.miFormulario2.get('')?.value; */
+   console.log(this.miFormulario2.value);
+   /* this.formulario2Array.push(this.miFormulario2.value);
+   console.log("formulario2", this.formulario2Array); */
+
+  const etiquetas = this.miFormulario2.value;
+  this.formulario2Array.push(etiquetas);
+
+  console.log(this.formulario2Array);
+
+ 
+   /* const  array2 = ["<li>hola mundo</li>"];
+   const objeto1: { [key: string]: any } =   {"0":"<p class='parrafo'>asfasfa parrafo</p>","1":"<p class='parrafo'>asfasfa parrafo</p>","2":"<p class='parrafo'>asfasfa parrafo</p>"};
+   objeto1["subcontenido"] = array2;
+   console.log(objeto1);
+ */
+  }
+
+
+  crearHtml(array:any){
+   
+    const apertura = array[0].etiquetaPadre;
+    const cierre = array[0].etiquetaPadre;
+
+    const tagApertura =`<${apertura}>`;
+    const tagCierre =`</${apertura}>`;
+   
+
+    for(const obj of array){
+
+      let etiqueta = `<${obj.etiqueta}>${obj.contenido}</${obj.etiqueta}>`;
+      this.arrayTag2.push(etiqueta);
+    }
+
+    this.arrayTag2.unshift(tagApertura);
+    this.arrayTag2.push(tagCierre);
+    console.log(this.arrayTag2);
+    this.convertirObjeto["subcontenido"]=this.arrayTag2;
+    console.log(this.convertirObjeto);
+   /*  this.convertirObjetostring["subcontenido"]=this.arrayTag2 */
+   console.log(JSON.stringify(this.convertirObjeto));
+
+  }
   
 
+
+
+
+
+
 }
+
+
+
+
+
+
+

@@ -1,13 +1,15 @@
-  
+<div>
+
+</div>
 <div class="main">
     <form class="container-form" [formGroup]="miFormulario" (ngSubmit)="addPerson(miFormulario)">
        
        <div class="agrupados">
             <div class="separete-v">
                 <label for="textSeccion">seccion</label>
-            <input type="text" name="textSeccion" formControlName="seccion">
+                <input type="text" name="textSeccion" formControlName="seccion">
             </div>
-            <!-- campo etiqueta para saber que tipo p, h1, h2 etc -->
+                <!-- campo etiqueta para saber que tipo p, h1, h2 etc -->
             <div class="separete-v">
                 <label for="selectEtiqueta">Etiqueta</label>
                 <select name="selectEtiqueta"  formControlName="etiqueta">
@@ -15,64 +17,45 @@
                 </select>
             </div>
 
-            <!-- estilos para cc clase -->
+                <!-- estilos para cc clase -->
             <div class="separete-v">
                 <label for="textclase">clase</label>
-            <!--  <input type="text" name="textClase" formControlName="clase"> -->
                 <select name="textclase" formControlName="clase">
                     <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
                 </select>
             </div>
        </div>
-
-
         <!-- en caso de ser una imagen agregamos la direccion "src" -->
 
         <div class="agrupados" *ngIf="miFormulario.get('etiqueta')?.value=='img'">
-
             <label for="textUrl">url</label>
             <input type="text" name="textUrl" formControlName="url">
         </div>
        
-
-     
         <!-- campo dato -->
         <div class="separete-v">
             <label for="textContenido">contenido</label>
             <textarea name="textContenido" cols="100" rows="10" formControlName="contenido"></textarea>
         </div>
+        <!-- campo codigo-->
 
-
-
-
-
-    <!-- campo codigo-->
-
-    <div class="agrupados" *ngIf="miFormulario.get('etiqueta')?.value=='Code'">
-        <label for="textCodigo">codigo</label>
-        <textarea name="textCodigo" cols="100" rows="6" formControlName="codigo"></textarea>
+        <div class="agrupados" *ngIf="miFormulario.get('etiqueta')?.value=='Code'">
+            <label for="textCodigo">codigo</label>
+            <textarea name="textCodigo" cols="100" rows="6" formControlName="codigo"></textarea>
         </div>
-
-
-
-         <div class="separete-v">
-          
-        </div>
-
-
-
-
-
+            <div class="separete-v">
+            </div>
         <input class="boton-enviar" type="submit" value="construir" >
     </form>
+
+    <div>
+        <p>{{arrayProvisional}}</p>
+    </div>
 
        
 
     <div class="presentar-datos" *ngFor="let mi of miarray; let i = index">
             <div><span>clase: </span>{{mi.clase}} <span>contenido: </span>{{mi.contenido}}<span>etiqueta: </span>{{mi.etiqueta}} <span>seccion: </span>{{mi.seccion}}<span>subcontenido: </span>{{mi.subcontenido}}<span>url: </span>{{mi.url}}</div>
-
-
-
             <button class="boton-borrar" type="button" (click)="removeItem2(i)">borrar item {{i}}</button>
     </div>
     
@@ -83,31 +66,70 @@
     </div>
     <p (click)="mostrarConsole()">oprimier para mistrar</p>
 
-
-
-
-
-
     <div class="presentacion-informacion">
         <p>aqui iria array provisional</p>
-
         <p>{{arrayProvisional}}</p>
     </div>
 
-
-
-
-
- 
   <div class="presentacion-informacion">
     <p>{{this.convertirObjetostring}}</p>
   </div>
 
-
-    <div>
+    <!-- <div>
         <button (click)="consultarBD()">consular api</button>
-    </div>
+    </div> -->
 
 </div>
+
+
+<!-- segundo formulario para las etiquetas compuestas -->
+
+
+<div class="main">
+
+    <form class="container-form" [formGroup]="miFormulario2" (ngSubmit)="subcontenido2(miFormulario2)">
+
+
+        <div class="separete-v">
+            <label for="selectEtiqueta">Etiqueta padre</label>
+            <select name="selectEtiqueta"  formControlName="etiquetaPadre">
+                <option *ngFor ="let cont of tagPadre" value={{cont.etiqueta}} >{{cont.nombre}}</option>
+            </select>
+        </div>
+
+        <div class="separete-v">
+            <label for="selectEtiqueta">Etiqueta</label>
+            <select name="selectEtiqueta"  formControlName="etiqueta">
+                <option *ngFor ="let cont of clasesCss" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
+            </select>
+        </div>
+
+            <!-- estilos para cc clase -->
+        <div class="separete-v">
+            <label for="textclase">clase</label>
+            <select name="textclase" formControlName="clase">
+                <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
+            </select>
+        </div>
+
+        <div class="separete-v">
+            <label for="textContenido">contenido</label>
+            <textarea name="textContenido" cols="100" rows="10" formControlName="contenido"></textarea>
+        </div>
+
+        <input class="boton-enviar" type="submit" value="construir" >
+    </form>
+
+    <div>
+        <button (click)="crearHtml(formulario2Array)">construir array</button>
+    </div>
+
+    <div>
+        <p *ngFor="let mi of formulario2Array">{{mi.etiqueta}} {{mi.clase}} {{mi.contenido}}</p>
+    </div>
+</div>
+
+
+
 
 
