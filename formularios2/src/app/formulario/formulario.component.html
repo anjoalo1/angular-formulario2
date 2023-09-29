@@ -55,8 +55,15 @@
        
 
     <div class="presentar-datos" *ngFor="let mi of miarray; let i = index">
-            <div><span>clase: </span>{{mi.clase}} <span>contenido: </span>{{mi.contenido}}<span>etiqueta: </span>{{mi.etiqueta}} <span>seccion: </span>{{mi.seccion}}<span>subcontenido: </span>{{mi.subcontenido}}<span>url: </span>{{mi.url}}</div>
-            <button class="boton-borrar" type="button" (click)="removeItem2(i)">borrar item {{i}}</button>
+         <div class="grid-deletearray">
+            <div>
+                <p>&lt;{{mi.etiqueta}} class="{{mi.clase}}"&gt;{{mi.contenido}}&lt;/{{mi.etiqueta}}&gt;</p>
+            </div>
+
+            <div>
+                <button class="boton-borrar" type="button" (click)="removeItem2(i)">borrar item {{i}}</button>
+            </div>
+         </div>
     </div>
     
 
@@ -72,7 +79,13 @@
     </div>
 
   <div class="presentacion-informacion">
+    <p>aqui iriathis.convertirObjetostring</p>
     <p>{{this.convertirObjetostring}}</p>
+  </div>
+
+
+  <div>
+    <p *ngFor="let uno of arrayAllTag">{{uno}}</p>
   </div>
 
     <!-- <div>
@@ -90,26 +103,34 @@
     <form class="container-form" [formGroup]="miFormulario2" (ngSubmit)="subcontenido2(miFormulario2)">
 
 
-        <div class="separete-v">
-            <label for="selectEtiqueta">Etiqueta padre</label>
-            <select name="selectEtiqueta"  formControlName="etiquetaPadre">
-                <option *ngFor ="let cont of tagPadre" value={{cont.etiqueta}} >{{cont.nombre}}</option>
-            </select>
-        </div>
-
-        <div class="separete-v">
-            <label for="selectEtiqueta">Etiqueta</label>
-            <select name="selectEtiqueta"  formControlName="etiqueta">
-                <option *ngFor ="let cont of clasesCss" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
-            </select>
-        </div>
-
-            <!-- estilos para cc clase -->
-        <div class="separete-v">
-            <label for="textclase">clase</label>
-            <select name="textclase" formControlName="clase">
-                <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
-            </select>
+        <div class="agrupados">
+            <div class="separete-v">
+                <label for="selectEtiqueta">Etiqueta padre</label>
+                <select name="selectEtiqueta"  formControlName="etiquetaPadre">
+                    <option *ngFor ="let cont of tagPadre" value={{cont.etiqueta}} >{{cont.nombre}}</option>
+                </select>
+            </div>
+            <div class="separete-v">
+                <label for="selectClasePadre">Clase padre</label>
+                <select name="selectClasePadre"  formControlName="etiquetaPadreClase">
+                    <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
+                </select>
+            </div>
+    
+            <div class="separete-v">
+                <label for="selectEtiqueta">Etiqueta</label>
+                <select name="selectEtiqueta"  formControlName="etiqueta">
+                    <option *ngFor ="let cont of tag2Form" value={{cont.etiqueta}} >{{cont.etiqueta}}</option>
+                </select>
+            </div>
+    
+                <!-- estilos para cc clase -->
+            <div class="separete-v">
+                <label for="textclase">clase</label>
+                <select name="textclase" formControlName="clase">
+                    <option *ngFor ="let cont of clasesCss" value={{cont.clase}} >{{cont.clase}}</option>
+                </select>
+            </div>
         </div>
 
         <div class="separete-v">
@@ -127,7 +148,23 @@
     <div>
         <p *ngFor="let mi of formulario2Array">{{mi.etiqueta}} {{mi.clase}} {{mi.contenido}}</p>
     </div>
+
+    <div>
+        <p *ngFor="let con of arrayTag2">{{con}}</p>
+    </div>
 </div>
+
+<div>
+    <button type="button" (click)="unir2Arrays(arrayAllTag, arrayTag2)">unir dos arrays</button>
+</div>
+
+<div>
+    {{objetoFinal1.seccion}}
+    {{objetoFinal1.contenido}}
+
+</div>
+
+
 
 
 

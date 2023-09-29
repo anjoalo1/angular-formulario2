@@ -5,7 +5,6 @@ export interface Contenido {
     contenido: String;
     url?:String;
    /*  selectsubcon:String; */
-    subcontenido?:Subcontenido[];
     codigo?:String;
   
   }
@@ -18,4 +17,9 @@ export interface Contenido {
 
   export interface ArrayEtiquetas{
     etiqueta:string;
+  }
+
+  export interface objetoFinal{
+    seccion:string,
+    contenido:string[];
   }
